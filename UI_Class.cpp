@@ -113,18 +113,32 @@ class UI{
         }
 
         void Display_Memory(){
-             int count = 0;
-             sort(Memory_print_add.begin() , Memory_print_add.end());
-             for(int i = 0 ; i < Memory_print_add.size() ; i++){
-                string mem_add = ALU::dec_to_hex(Memory_print_add[i]);
-                cout << RED << "M"+mem_add << RESET << " = " << Mem[mem_add] << "  "; 
-                count++;
-                if(count % 4 == 0){
-                cout << endl;
+            int col = 1;
+            int count = 0;
+            cout << "   ";
+            for(int i = 0 ; i < 16 ; i++){
+                cout << ALU::dec_to_hex(i) << "   ";
+            }
+            cout << endl;
+            cout << ALU::dec_to_hex(0) << "  ";
+            for (int i = 0; i < 256 ; i++) {
+                
+                string mem_add = ALU::dec_to_hex(i);
+                if(Mem[mem_add].empty()){
+                    Mem[mem_add] = "00";
                 }
-             }
-            
-            
+                cout << Mem[mem_add] << "  ";
+                count++;
+                if (count % 16 == 0) {
+                    cout << endl;
+                    if(col != 16){
+                        cout << ALU::dec_to_hex(col) << "  ";
+                        col++;
+                    }
+                
+                }
+            }
+                    
         }
 
    
@@ -133,6 +147,3 @@ class UI{
 
 
 };
-
-
-
